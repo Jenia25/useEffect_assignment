@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from "react";
 
 function App() {
-  // State for counter
+  // Counter state
   const [count, setCount] = useState(0);
 
-  // State for API data
+  // Users API state
   const [users, setUsers] = useState([]);
 
-  // useEffect to fetch data
+  // useEffect: Fetch data once on mount
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((res) => res.json())
-      .then((data) => setUsers(data.slice(0, 9))); 
+      .then((data) => setUsers(data.slice(0, 9))) 
+      .catch((err) => console.error(err));
   }, []);
 
-  // Functions for counter
+  // Counter functions
   const increment = () => setCount(count + 1);
   const decrement = () => setCount(count - 1);
   const reset = () => setCount(0);
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center p-8">
+      {/* Title */}
       <h1 className="text-3xl font-bold mb-6 text-blue-600">
         Welcome to useEffect Practice
       </h1>
@@ -50,8 +52,8 @@ function App() {
         </div>
       </div>
 
-      {/* API Data Section */}
-      <h2 className="text-xl font-semibold mb-4">User Data (from API)</h2>
+      {/* Users API Section */}
+      <h2 className="text-xl font-semibold mb-4">User Data (API)</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {users.map((user) => (
           <div
